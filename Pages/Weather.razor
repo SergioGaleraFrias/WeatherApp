@@ -1,0 +1,67 @@
+﻿@page "/weather"
+@using System.Globalization;
+@using WeatherApp.Models;
+@using WeatherApp.Utilities
+@inject HttpClient Client;
+<h3>WeatherAPP</h3>
+
+<div class="input-group mb-5 mt-5">
+    <input class="form-control" type="text" placeholder="City Name" @bind=city />
+    <div>
+        <button class="btn btn-outline-secondary" @onclick=GetWeather type="button">Search</button>
+    </div>
+</div>
+
+@if (weatherData != null)
+{
+    <div class="text-center">
+        <p class="display-5">@city</p>
+        <p class="display-1">@weatherData.current.temperature_2m ºC</p>
+        <p class="display-6">@WeatherCode.Convert(@weatherData.daily.weathercode[0])</p>
+    </div>
+
+    <div class="card-group">
+
+        @for (int i = 0; i < weatherData.daily.time.Length; i++)
+        {
+
+            <WeatherApp.Componets.WeatherCard 
+                   Day="@weatherData.daily.time[i]"
+                   TemperatureMax="@weatherData.daily.temperature_2m_max[i]"
+                   TemperatureMin="@weatherData.daily.temperature_2m_min[i]"
+                   TextTime="@WeatherCode.Convert(@weatherData.daily.weathercode[i])">
+            </WeatherApp.Componets.WeatherCard>
+        }
+
+    </div>
+
+}
+
+
+
+
+
+@code {
+    string city = "";
+    float lat;
+    float lon;
+    WeatherModel? weatherData; // ?puede encontarse la ciudd o no
+
+    async Task GetWeather()
+    {
+        var cityData = await GetCityData(); //Conseguimos la lat y la lon de la ciudad
+
+        lat = cityData.results[0].lat; //Tiene coma decimal
+        lon = cityData.results[0].lon; //Tiene coma decimal
+
+        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
+        weatherData = await Client.GetFromJsonAsync<WeatherModel>(EndPoints.GetWeatherEndPoint(lat, lon));
+        CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("es-es");
+    }
+
+    async Task<CityData> GetCityData()
+    {
+        var cityData = await Client.GetFromJsonAsync<CityData>(EndPoints.GetGeoApifyEndPoint(city));
+        return cityData;
+    }
+}

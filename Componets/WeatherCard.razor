@@ -1,0 +1,29 @@
+﻿
+
+<div class="card border-dark mb-3" style="max-width:50rem;">
+    <div class="text-center">
+        <div class="card-header">@Day</div>
+        <div class="card-body">
+            <h5> @TemperatureMin ºC / @TemperatureMax ºC</h5>
+            <p class="card-text">@TextTime</p>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+
+    [Parameter]
+    public string Day { get; set; }
+
+    [Parameter]
+    public float TemperatureMin { get; set; }
+
+    [Parameter]
+    public float TemperatureMax { get; set; }
+
+    [Parameter]
+    public string TextTime { get; set; }
+
+}
