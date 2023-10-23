@@ -1,11 +1,10 @@
-﻿
-
-<div class="card border-dark mb-3" style="max-width:50rem;">
+﻿<div class="card border-dark mb-3" style="max-width:50rem; background-color: #add8e6;">
     <div class="text-center">
         <div class="card-header">@Day</div>
         <div class="card-body">
             <h5> @TemperatureMin ºC / @TemperatureMax ºC</h5>
             <p class="card-text">@TextTime</p>
+            <p class="card-text">Uv: @UV</p>
         </div>
     </div>
 </div>
@@ -25,5 +24,10 @@
 
     [Parameter]
     public string TextTime { get; set; }
+
+    [Parameter]
+    public float UV { get; set; }
+
+
 
 }

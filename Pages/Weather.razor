@@ -18,6 +18,8 @@
         <p class="display-5">@city</p>
         <p class="display-1">@weatherData.current.temperature_2m ºC</p>
         <p class="display-6">@WeatherCode.Convert(@weatherData.daily.weathercode[0])</p>
+        <p class="display-7"> Precipitation: @weatherData.current.precipitation mm</p>
+        <p class="display-7"> Rain: @weatherData.current.rain mm</p>
     </div>
 
     <div class="card-group">
@@ -29,7 +31,10 @@
                    Day="@weatherData.daily.time[i]"
                    TemperatureMax="@weatherData.daily.temperature_2m_max[i]"
                    TemperatureMin="@weatherData.daily.temperature_2m_min[i]"
-                   TextTime="@WeatherCode.Convert(@weatherData.daily.weathercode[i])">
+                   TextTime="@WeatherCode.Convert(@weatherData.daily.weathercode[i])"
+                   UV="@weatherData.daily.uv_index_max[i]">
+                   
+                   
             </WeatherApp.Componets.WeatherCard>
         }
 

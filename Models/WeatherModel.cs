@@ -1,5 +1,6 @@
 ﻿namespace WeatherApp.Models
 {
+
     public class WeatherModel
     {
         public float latitude { get; set; }
@@ -23,6 +24,9 @@
         public string interval { get; set; }
         public string temperature_2m { get; set; }
         public string relativehumidity_2m { get; set; }
+        public string is_day { get; set; }
+        public string precipitation { get; set; }
+        public string rain { get; set; }
     }
 
     public class Current
@@ -31,6 +35,9 @@
         public int interval { get; set; }
         public float temperature_2m { get; set; }
         public int relativehumidity_2m { get; set; }
+        public int is_day { get; set; }
+        public float precipitation { get; set; }
+        public float rain { get; set; }
     }
 
     public class Hourly_Units
@@ -51,6 +58,7 @@
         public string weathercode { get; set; }
         public string temperature_2m_max { get; set; }
         public string temperature_2m_min { get; set; }
+        public string uv_index_max { get; set; }
     }
 
     public class Daily
@@ -59,6 +67,7 @@
         public int[] weathercode { get; set; }
         public float[] temperature_2m_max { get; set; }
         public float[] temperature_2m_min { get; set; }
+        public float[] uv_index_max { get; set; }
     }
 
 }
